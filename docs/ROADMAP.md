@@ -18,9 +18,9 @@
 
 | 항목 | 상태 |
 |------|------|
-| 전체 진행률 | 0% |
-| 현재 Phase | Phase 1 예정 |
-| 다음 마일스톤 | Phase 1 완료 - 상태 감지 및 UI 폼 |
+| 전체 진행률 | 33% (1/3 Phase 완료) |
+| 현재 Phase | Phase 2 진행 예정 |
+| 다음 마일스톤 | Phase 2 완료 - 토글 및 재부팅 안내 |
 | 예상 완료일 | 2026-04-09 |
 
 ---
@@ -85,19 +85,21 @@ Phase 3: 완성도 + 배포  ← Phase 2에 의존
 
 **기간:** 1주 (2026-03-20 ~ 2026-03-26)
 **우선순위:** Must Have
+**상태:** ✅ 완료 (2026-03-19)
+**PR:** sprint-01 -> main
 
 ### 목표
 앱 실행 시 Hyper-V 현재 상태를 즉시 표시하는 단일 폼을 완성한다. 이 단계가 끝나면 사용자가 EXE를 실행해서 Hyper-V가 켜져 있는지 꺼져 있는지 바로 확인할 수 있다.
 
 ### 작업 목록
 
-- 📋 **[1-1] Delphi VCL 프로젝트 생성** (복잡도: 낮음, 0.5일)
+- ✅ **[1-1] Delphi VCL 프로젝트 생성** (복잡도: 낮음, 0.5일)
   - RAD Studio에서 VCL Forms Application 프로젝트 생성
   - 프로젝트명: `SetHyperV`
   - 소스 파일을 `src/` 디렉토리에 배치
   - `.dproj`, `.dpr` 파일 초기 구성
 
-- 📋 **[1-2] 메인 폼 UI 구성** (복잡도: 낮음, 1일)
+- ✅ **[1-2] 메인 폼 UI 구성** (복잡도: 낮음, 1일)
   - 폼 크기: 380 x 200 px, 고정 크기 (`BorderStyle = bsSingle`, `BorderIcons = [biSystemMenu, biMinimize]`)
   - 폼 타이틀: "Windows Hyper-V 관리"
   - 상태 표시 레이블 (`TLabel`): "현재 상태:" + 상태값 텍스트
@@ -106,7 +108,7 @@ Phase 3: 완성도 + 배포  ← Phase 2에 의존
   - 하단 안내 문구 레이블: "* 변경 후 재부팅이 필요합니다."
   - 감지 불가 시 토글 버튼 `Enabled := False`
 
-- 📋 **[1-3] Hyper-V 상태 감지 로직** (복잡도: 중간, 1.5일)
+- ✅ **[1-3] Hyper-V 상태 감지 로직** (복잡도: 중간, 1.5일)
   - `HyperVControl.pas` 유닛 생성
   - `CreateProcess`로 `bcdedit /enum {current}` 실행하여 stdout 캡처
   - stdout에서 `hypervisorlaunchtype` 값 파싱: `Auto` = ON, `Off` = OFF
@@ -115,13 +117,13 @@ Phase 3: 완성도 + 배포  ← Phase 2에 의존
   - 함수 시그니처: `function GetHyperVStatus: THyperVStatus`
   - `bcdedit` 실행 시 관리자 권한 없어도 상태 조회가 가능한지 검증 (가능함 - 읽기는 관리자 불필요)
 
-- 📋 **[1-4] 관리자 권한 확인 유틸리티** (복잡도: 낮음, 0.5일)
+- ✅ **[1-4] 관리자 권한 확인 유틸리티** (복잡도: 낮음, 0.5일)
   - `AdminHelper.pas` 유닛 생성
   - `function IsRunAsAdmin: Boolean` - Windows API `CheckTokenMembership` 또는 `IsUserAnAdmin` 사용
   - `procedure RunAsAdmin(const ExePath: string)` - `ShellExecute`에 `runas` verb 사용
   - 이 단계에서는 함수 구현까지만, 실제 호출은 Phase 2에서 수행
 
-- 📋 **[1-5] 폼과 로직 통합** (복잡도: 낮음, 0.5일)
+- ✅ **[1-5] 폼과 로직 통합** (복잡도: 낮음, 0.5일)
   - `MainForm.FormCreate` 이벤트에서 `GetHyperVStatus` 호출
   - 결과에 따라 레이블 텍스트, 색상, 버튼 텍스트 동적 설정
   - 상태 감지 1초 이내 완료 확인
@@ -349,7 +351,7 @@ test ! -f Win64/Release/SetHyperV.rsm && echo "NO DEBUG SYMBOLS OK"
 
 | 마일스톤 | 목표일 | 산출물 | 상태 |
 |----------|--------|--------|------|
-| M1: 상태 감지 UI | 2026-03-26 | 상태 표시가 동작하는 EXE | 📋 예정 |
+| M1: 상태 감지 UI | 2026-03-26 | 상태 표시가 동작하는 EXE | ✅ 완료 (2026-03-19) |
 | M2: 핵심 기능 완성 | 2026-04-02 | 토글+재부팅 안내가 동작하는 EXE | 📋 예정 |
 | M3: v1.0 릴리스 | 2026-04-09 | 배포 가능한 최종 EXE | 📋 예정 |
 
