@@ -1,0 +1,76 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8A1A4E8B-3F2C-4D9A-B7E6-1C5F0A2D3E4F}</ProjectGuid>
+    <ProjectVersion>19.4</ProjectVersion>
+    <FrameworkType>VCL</FrameworkType>
+    <MainSource>SetHyperV.dpr</MainSource>
+    <Base>True</Base>
+    <Config Condition="'$(Config)'==''">Debug</Config>
+    <Platform Condition="'$(Platform)'==''">Win64</Platform>
+    <TargetedPlatforms>1</TargetedPlatforms>
+    <AppType>Application</AppType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+    <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+    <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_UsePackage>rtl;vcl;vclimg;vclie;vclactnband;vcldb;dbrtl;IndyCore;IndyProtocols;IndySystem</DCC_UsePackage>
+    <DCC_Namespace>Winapi;System;Vcl;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde</DCC_Namespace>
+    <DCC_Icon>SetHyperV.ico</DCC_Icon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Config)'=='Release' and '$(Base)'==''">
+    <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_Optimize>true</DCC_Optimize>
+    <DCC_GenerateStackFrames>false</DCC_GenerateStackFrames>
+    <DCC_DebugInfoInExe>false</DCC_DebugInfoInExe>
+    <DCC_RemoteDebug>false</DCC_RemoteDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Config)'=='Debug' and '$(Base)'==''">
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_Optimize>false</DCC_Optimize>
+    <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+    <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+    <DCC_RemoteDebug>false</DCC_RemoteDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Platform)'=='Win64' and '$(Base)'==''">
+    <DCC_ExeOutput>..\Win64\$(Config)</DCC_ExeOutput>
+  </PropertyGroup>
+  <ItemGroup>
+    <DelphiCompile Include="$(MainSource)">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="MainForm.pas">
+      <Form>MainForm</Form>
+    </DCCReference>
+    <DCCReference Include="HyperVControl.pas"/>
+    <DCCReference Include="AdminHelper.pas"/>
+    <BuildConfiguration Include="Release">
+      <Key>Cfg_2</Key>
+      <CfgParent>Base</CfgParent>
+    </BuildConfiguration>
+    <BuildConfiguration Include="Base">
+      <Key>Base</Key>
+    </BuildConfiguration>
+    <BuildConfiguration Include="Debug">
+      <Key>Cfg_1</Key>
+      <CfgParent>Base</CfgParent>
+    </BuildConfiguration>
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+    <Borland.ProjectType/>
+    <BorlandProject>
+      <Delphi.Personality>
+        <Source>
+          <Source Name="MainSource">SetHyperV.dpr</Source>
+        </Source>
+        <Excluded_Packages/>
+      </Delphi.Personality>
+    </BorlandProject>
+    <ProjectFileVersion>12</ProjectFileVersion>
+  </ProjectExtensions>
+  <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+  <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"
+          Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>
