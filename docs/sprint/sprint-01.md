@@ -845,15 +845,23 @@ git commit -m "chore: Sprint 1 complete - Hyper-V status detection UI working"
 
 Sprint 1은 아래 모든 항목이 충족될 때 완료로 간주한다:
 
-- [ ] `src/SetHyperV.dpr`, `src/SetHyperV.dproj` 생성 및 컴파일 성공
-- [ ] `src/HyperVControl.pas` - `GetHyperVStatus: THyperVStatus` 함수 동작
-- [ ] `src/AdminHelper.pas` - `IsRunAsAdmin: Boolean`, `RunAsAdmin` 함수 구현 완료
-- [ ] `src/MainForm.pas` / `MainForm.dfm` - UI 레이아웃 구성 완료
-- [ ] `FormCreate`에서 `GetHyperVStatus` 호출 후 UI 반영
-- [ ] EXE 실행 시 1초 이내 상태 표시 (ON 초록 / OFF 빨강 / 감지불가 올리브)
-- [ ] 일반 사용자 권한으로 실행해도 상태 조회 정상 동작
-- [ ] 감지 불가 시 토글 버튼 `Enabled = False`
-- [ ] Release 모드 빌드 성공 (`Win64/Release/SetHyperV.exe` 생성)
+- [x] `src/SetHyperV.dpr`, `src/SetHyperV.dproj` 생성 및 컴파일 성공
+- [x] `src/HyperVControl.pas` - `GetHyperVStatus: THyperVStatus` 함수 동작
+- [x] `src/AdminHelper.pas` - `IsRunAsAdmin: Boolean`, `RunAsAdmin` 함수 구현 완료
+- [x] `src/MainForm.pas` / `MainForm.dfm` - UI 레이아웃 구성 완료
+- [x] `FormCreate`에서 `GetHyperVStatus` 호출 후 UI 반영
+- [ ] EXE 실행 시 1초 이내 상태 표시 (ON 초록 / OFF 빨강 / 감지불가 올리브) - 수동 검증 필요
+- [ ] 일반 사용자 권한으로 실행해도 상태 조회 정상 동작 - 수동 검증 필요
+- [x] 감지 불가 시 토글 버튼 `Enabled = False`
+- [ ] Release 모드 빌드 성공 (`Win64/Release/SetHyperV.exe` 생성) - 수동 빌드 필요
+
+## 검증 결과
+
+**완료일:** 2026-03-19
+**상태:** ✅ 코드 구현 완료 / 수동 빌드 및 실행 검증 필요
+
+- [검증 보고서](sprint-01/validation-report.md)
+- [코드 리뷰 보고서](sprint-01/code-review.md)
 
 ---
 
